@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+Questions
+{% endblock title %}
+
+{% block content %}
+
+    <!-- top, then categories or just ALL? -->
+    <h2 class="text-center">Top Value</h2>
+    {% for q in top %}
+        {% include "_q.html" %}
+    {% endfor %}
+
+    <hr>
+
+    <h2 class="text-center">And the Rest</h2>
+    {% for q in questions %}
+        {% include "_q.html" %}
+    {% endfor %}
+
+{% endblock content %}

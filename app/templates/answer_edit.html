@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+Edit your answer
+{% endblock title %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="page-header text-center">
+            <h3>Edit your answer</h3>
+        </div>
+        <div class="col-md-3 col-sm-0"></div>
+        <div class="col-md-6 col-s-4">
+            <div class="inner question">
+                <div class="question-short-title"><em>{{ q.title | capitalize}}</em></div>
+                <div class="">
+                    {{ q.description }}
+                </div>
+                <div class="question-short-content">
+                    <span class="question-short-value">Currently at: {{ q.current_value }}</span>
+                    <span class="question-short-category">{{ q.category | capitalize }}</span>
+                    <span class="question-short-count">Answers: {{ q.answers.count() }}</span>
+                </div>
+            </div>
+         <h4 class="text-center">Current Answer</h4>
+            <div class="inner answer">
+                <a href="{{ url_for('main.profile', username=a.author.username) }}">
+                    <div class="answer-author">From {{ a.author.username }}</div>
+                </a>
+                <div class="answer-content">{{ a.content }}</div>
+            </div>
+
+            <div class="text-center">
+            {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+        <div class="col-md-3 col-sm-0"></div>
+
+    </div>
+
+{% endblock content %}

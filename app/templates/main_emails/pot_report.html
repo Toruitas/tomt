@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block page_content %}
+
+    <h1>{{ title }}</h1>
+    <p><a href="{{ url_for('profile', id=user.id) }}">{{ user.name }}</a> has a complaint about
+        <a href="{{ url_for('pot_of_gold',id=id) }}"> this pot.</a></p>
+    <p>{{ complaint }}</p>
+
+    <p>To respond to this complaint, you can email this user at: {{ user.email }}.</p>
+
+    <p>Sincerely,
+    Your Mother</p>
+
+{% endblock page_content %}

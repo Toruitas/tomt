@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add reward to your question
+{% endblock title %}
+
+{% block content %}
+<div class="col-md-6">
+    {% if current_user == creator %}
+        <p>Stripe Stuff</p>
+    <!-- TODO: add stripe payment shit. -->
+    {% else %}
+
+        <h3>This isn't yours to add prize money to, but hey good on you for being generous.</h3>
+        <p>Maybe you should just try to <a href="{{ url_for('main.question', id=id) }}">answer it</a>, eh?</p>
+    {% endif %}
+</div>
+
+
+{% endblock content %}

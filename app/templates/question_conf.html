@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+You did it!
+{% endblock title %}
+
+{% block content %}
+
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h4>Asking questions is the first step to wisdom...</h4>
+        <p>The second step is finding answers.</p>
+        <p>How about a prize so someone will find yours?</p>
+        <a href="{{ url_for('main.add_reward',id=id) }}"><button class="add-reward">Add a reward</button></a>
+        <p>Or just view your <b><a href="{{ url_for('main.question', id=id) }}">question</a></b></p>
+    </div>
+
+
+{% endblock content %}

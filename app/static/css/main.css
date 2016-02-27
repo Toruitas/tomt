@@ -1,0 +1,157 @@
+/*http://semantic-ui.com/views/card.html*/
+
+html, body{
+    /*to get color to go all the way to the bottom */
+}
+
+body{
+    background:#E8DFCC;
+}
+
+#wrapper{
+    background:#EDE8DD;
+    /*to get color to go all the way to the bottom */
+    min-height:100%;
+}
+
+a{
+    color:inherit;
+}
+
+.inner{
+    padding:5px;
+    background:#FFFFFF;
+    border-radius: 5px;
+    border:1px solid dimgray;
+    margin-bottom:12px;
+}
+
+.question{
+    border:1px solid dimgray;
+    border-radius: 5px;
+    background:#FFFFFF;
+    min-height:70px;
+}
+
+
+.question:hover{
+    background:#f2f5df;
+}
+
+.question-short-title{
+
+}
+
+.question-short-content{
+    padding-top: 2px;
+    text-align:center;
+}
+
+.question-short-value{
+    float: left;
+}
+
+.question-short-category{
+
+}
+
+.question-short-count{
+    float:right;
+}
+
+.undecorated{
+    color:inherit;
+}
+
+.answer{
+    color:inherit;
+    background-color:#F0D1C7;
+    min-height:70px;
+}
+
+.answer:hover{
+    background-color: #F0B9A8;
+}
+
+.answer a{
+    color:inherit;
+}
+
+.accepted{
+    background: lightblue;
+}
+
+.accepted:hover{
+    background:#93D1E6;
+}
+
+.answer-accepted-btn{
+
+}
+
+.bottom-row{
+    position:absolute;
+    bottom:1.25em;
+    left: 1.25em;
+    right:1.25em;
+}
+
+#footer {
+    position:relative;
+    bottom:0;
+    clear:both;
+    padding:10px;
+    width:inherit;
+    background-color:#F8F8F8;
+}
+
+hr{
+    border-color:black;
+}
+
+#twitter-logo{
+    background-color: #55acee;
+    height: 29px;
+    padding:5px;
+    width:29px;
+    border-radius:3px;
+}
+
+#submit{
+    margin: 0 auto;
+}
+
+.solo-form{
+    text-align: center;
+}
+
+.nav-widen{
+    /*To fill the container, without affecitng the padding for everything else*/
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.flashes{
+    position:fixed;
+    top: 75px;
+    left: 33%;
+    width:33%;
+    border: black 1px solid;
+    border-radius:4px;
+    z-index: 100;
+    text-align: center;
+    list-style-type: none;
+    padding-left: 0;
+    padding-top:5px;
+    padding-bottom:5px;
+    margin-top:-20px;
+    background-color:#E8E841;
+
+}
+.flashes li{
+    list-style-type:none;
+}
+
+.user-answers{
+    margin-bottom: 10px;
+}

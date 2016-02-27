@@ -1,0 +1,21 @@
+{
+  "name": "tipOfMyTongue",
+  "authors": [
+    "Stuart Leitch <toruitas@gmail.com>"
+  ],
+  "description": "find that which escapes you",
+  "main": "",
+  "moduleType": [],
+  "keywords": [
+    "python"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

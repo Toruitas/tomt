@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+
+{% block title %}
+Category - {{ category |title }}
+{% endblock title %}
+
+{% block content %}
+
+    <h1 class="text-center">{{ category | title }}</h1>
+
+    {% for q in qs %}
+        {% include "_q.html" %}
+    {% endfor %}
+
+    {% if pagination %}
+    <div class="text-center">
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination, endpoint, category=category) }}
+        </div>
+    </div>
+    {% endif %}
+
+{% endblock content %}
+

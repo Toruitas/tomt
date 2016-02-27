@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}
+{{ question.title | title }}
+{% endblock title %}
+
+{% block content %}
+
+    <!-- Question Content -->
+    <div class="row">
+        <div class="col-md-7 col-sm-4">
+            <h2>{{ question.title | title}}</h2>
+            <br>
+            <div class="text-center">
+                <span class="pull-left">Bounty: {{ question.current_value }}</span>
+                <span><a href="{{ url_for("main.profile",username=creator.username) }}">Asked by: {{ creator.username }}</a></span>
+                <span class="pull-right">Asked in: {{ question.category | capitalize }}</span>
+            </div>
+            <br>
+            <div class="question-content">
+                {{ question.description }}
+            </div>
+        </div>
+        <div class="col-md-5 col-sm-4">
+            <img class="img-responsive" src="http://www.placecage.com/c/400/300">
+        </div>
+    </div>
+    <div class="row">
+
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-md-8 col-sm-4 question-content">
+
+        </div>
+    </div>
+    {% if creator == current_user and not question.solved %}
+        <a href="{{ url_for('main.add_reward',id=question.id) }}"><button class="add-reward">Add reward</button></a>
+    {% endif %}
+    {% if (creator == current_user or current_user.is_administrator()) and not question.solved %}
+        <div>
+    <a href="{{ url_for('main.edit_question',id=question.id) }}"><button class="add-reward">Edit Question</button></a>
+        </div>
+    {% endif %}
+
+    {% if current_user.can(Permission.CREATE) and not current_user.has_answered(id) %} <!-- bad to put so much logic in ?-->
+        <!-- if current user has already answered it, can't answer again -->
+        <!-- if current user isn't logged in, won't have CREATION permission -->
+        <div class="row">
+            <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+            </div>
+        </div>
+    {% endif %}
+
+    <h2>Answers</h2>
+    <!-- for the accepted answer-->
+    {% if question.solved%}
+        <div class="answer-accepted">
+            {% include "_a.html" %}
+        </div>
+        {% if question.answers.count()>1  %}
+        <div class="row">
+            <div class="col-md-12">Let's hear it for the runners-up...</div>
+        </div>
+        <hr>
+        {% endif %}
+    {% endif %}
+
+
+    <!-- for all answers -->
+    {% for a in question.answers %}
+        {% if a.accepted %}
+        {% else %}
+            {% include "_a.html" %}
+            {% if question.solved %}
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+
+{% endblock content %}

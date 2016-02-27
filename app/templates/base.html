@@ -1,0 +1,138 @@
+{% extends 'bootstrap/base.html' %}
+
+{% block head %}
+
+{% block metas %}
+    {{ super() }}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+{% endblock metas %}
+
+<title>
+{% block title %}
+Tip of My Tongue
+{% endblock title %}
+</title>
+
+{% block styles %}
+ {{ super() }}
+    <!-- other css -->
+{#    <link rel="stylesheet" href="{{ url_for('static', filename='bower_components/semantic-ui-card/card.css') }}">#}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+{% endblock styles %}
+
+{% endblock head %}
+
+{% block body_attribs %}
+{% endblock body_attribs %}
+{% block body %}
+<div class="container" id="wrapper">
+    {% block navbar %}
+        <nav class="navbar navbar-default nav-widen">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                <a class="navbar-brand" href="{{ url_for('main.index') }}">Tip of My Tongue</a> <!-- logo goes here -->
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-center">
+                  <!--<li class="active"><a href="#">Home</a></li>  not needed. How append active to current page?-->
+                  <li><a href="{{ url_for('main.ask') }}">Ask</a></li>
+                  <li><a href="{{ url_for('main.questions') }}">Answer</a></li>
+
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ url_for('main.category',category='top') }}">Top Dollar</a></li>
+                        <!-- the rest of these populated by flask -->
+                        {% for cat in categories_list %}
+                        <li><a href="{{ url_for('main.category',category=cat) }}">{{ cat|title }}</a></li>
+                        {% endfor %}
+
+{#                      <li><a href="#">Another action</a></li>#}
+{#                      <li><a href="#">Something else here</a></li>#}
+{#                      <li role="separator" class="divider"></li>#}
+{#                      <li class="dropdown-header">Nav header</li>#}
+{#                      <li><a href="#">Separated link</a></li>#}
+{#                      <li><a href="#">One more separated link</a></li>#}
+                    </ul>
+                  </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                    <li class="active"><a href="{{ url_for('main.profile', username=current_user.username) }}">Profile <span class="sr-only">(current)</span></a></li>
+                    <li><a href="{{ url_for('auth.logout') }}">Log out</a></li>
+                    {% else %}
+                  <li><a href="{{ url_for('auth.login') }}">Log in</a></li>
+                  <li><a href="{{ url_for('auth.register') }}">Register</a></li>
+                    {% endif %}
+                    <li><a href="{{ url_for('main.about') }}">About</a></li>
+{#                  <li><a href="{{ url_for('main.contact') }}">Contact</a></li>#}
+                </ul>
+              </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+          </nav>
+
+    {% endblock navbar %}
+
+    {% block flash %}
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul class=flashes>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    {% endblock flash %}
+
+    <div id="main">
+    {% block content %}
+
+    {% endblock content %}
+    </div>
+
+    {% block footer %}
+        <div id="footer" class="row">
+            <div class="row footer-top">
+                <div class="col-md-6 col-sm-3">
+                    <a href="https://www.facebook.com">
+                        <img src="{{ url_for('static',filename='img/FB-f-Logo__blue_29.png') }}">
+                    </a>
+                    <a href="https://www.twitter.com">
+                        <img id="twitter-logo" src="{{ url_for('static',filename='img/Twitter_logo_white.png') }}">
+                    </a>
+                </div>
+            </div>
+            <div class="row footer-mid">
+                <div class="col-md-12 col-sm-6 text-center">Created by Toruitas Designs</div>
+            </div>
+            <div class="row footer-bottom">
+                <span class="col-md-6 col-sm-3">&copy; 2015 Tip of My Tongue, Inc. All Rights Reserved.</span>
+                <span class="col-md-6 col-sm-3 text-right">Terms of Service | Privacy Policy | Site-Map</span>
+            </div>
+        </div>
+
+    {% endblock footer %}
+
+</div>
+
+{% block scripts %}
+{{ super() }}
+    <!-- other JS -->
+    <!-- jQ already added by bootstrap, but just in case have local backup -->
+{#    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>#}
+    <script src="{{ url_for('static',filename='js/main.js') }}"></script>
+
+{% endblock scripts %}
+
+{% endblock body %}
+

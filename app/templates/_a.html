@@ -1,0 +1,17 @@
+<div class="col-md-6 col-s-4">
+    <div class="inner answer {% if a.accepted %}accepted{% endif %}" id="{{ a.id }}">
+        <a href="{{ url_for('main.profile', username=a.author.username) }}">
+            <div class="answer-author">From {{ a.author.username }}</div>
+        </a>
+        <div class="answer-content">{{ a.content }}</div>
+        {% if a.accepted %}
+            <div class="answer-accepted-btn">ACCEPTED</div>
+        {% elif not a.question.solved and current_user == a.question.creator %}
+            <a href="{{ url_for("main.accept", id=id, aid=a.id) }}"><button class="answer-accept-btn">ACCEPT</button></a>
+        {% endif %}
+
+        {% if (a.author == current_user or current_user.is_administrator()) and not a.question.solved %}
+            <a href="{{ url_for('main.edit_answer',id=a.question_id, aid=a.id) }}"><button class="answer-edit">Edit Answer</button></a>
+        {% endif %}
+    </div>
+</div>

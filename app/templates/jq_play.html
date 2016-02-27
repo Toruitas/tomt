@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+    	<title>Result</title>
+        <link rel='stylesheet' type='text/css' href='{{ url_for('static',filename='css/js_play.css') }}stylesheet.css'/>
+	</head>
+	<body>
+        <div id="menu">
+            <h3>jQuery</h3>
+            <div>
+                <p>jQuery is a JavaScript library that makes your websites look absolutely stunning.</p>
+            </div>
+            <h3>jQuery UI</h3>
+            <div>
+                <p>jQuery UI includes even more jQuery goodness!</p>
+            </div>
+            <h3>JavaScript</h3>
+            <div>
+                <p>JavaScript is a programming language used in web browsers, and it's what powers jQuery and jQuery UI. You can learn about JavaScript in the <a href="http://www.codecademy.com/tracks/javascript" target="blank" style="text-decoration:none; color:#F39814">JavaScript track</a> here on Codecademy.</p>
+            </div>
+        </div>
+        <div id="krypton"></div>
+        <form>
+        MESSAGE: <input type="text" name="message" value="Type your text here!">
+        </form>
+        <button>Add!</button><br/>
+        <div id="messages"></div>
+        <div id="hover"></div>
+        <form>
+			Name: <input type='text' name='name'>
+		</form>
+
+        <div id="animate"></div>
+
+        <div id="car">
+            <div id="top"></div>
+            <div id="bottom"></div>
+            <div id="fwheel"></div>
+            <div id="bwheel"></div>
+        </div>
+
+        <ol>
+            <li>Super Mario Bros.</li>
+            <li>Tetris</li>
+            <li>Legend of Zelda: Link's Awakening</li>
+            <li>Kirby's Dream World</li>
+            <li>Burger Time</li>
+            <li>Pokémon Red</li>
+            <li>Pokémon Blue</li>
+        </ol>
+
+    <a href="javascript:test()"><button>Test</button></a>
+	</body>
+<footer>
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="ajax.googleapis.com/ajax/libs/jqueryui/1.9.1/jquery-ui.min.js"></script> <!--http://jqueryui.com/-->
+    <script type='text/javascript' src='{{ url_for('static',filename='js/js_play.js') }}'></script>
+    <script>
+    function test(){
+        $.post('/_test_jq/',{
+            a: 'yeah'
+        }).done(function(){
+            console.log('it worked')
+        }).fail(function(){
+            console.log('it did not work')
+        });
+    }
+</script>
+</footer>
+</html>

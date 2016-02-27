@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}
+{% if user == current_user %}
+Your profile
+{% else %}
+{{ user.username }}'s profile
+{% endif %}
+{% endblock title %}
+
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-6">
+            <h2>{{ user.username }}</h2>
+            {% if user == current_user %}
+                <h4><a href="{{ url_for('auth.change_password') }}">Change Password</a></h4>
+                <h4><a href="{{ url_for('auth.change_email_request') }}">Change Email</a></h4>
+            {% endif %}
+            <p>Member since: {{ user.date_pretty() }}</p> <!--todo: timezone this shit -->
+            <p>Earned: {{ user.earned_pretty() }}</p>
+            <!--TODO: top 5% & 10% -->
+        </div>
+    </div>
+
+    {% if questions %}
+    <h3 class="text-center">{{ user.username }}'s Questions</h3>
+        <div class="row">
+            {% for q in questions %}
+                {% include "_q.html" %}
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <div class="row">
+        <br>
+        <h3 class="text-center">{{ user.username }}'s Answers</h3>
+    </div>
+
+    {% if answers %}
+    <!-- original question then just this answer -->
+    <div class="row">
+        <div class="col-md-6 col-s-4 text-center">
+            Questions
+        </div>
+        <div class="col-md-6 col-s-4 text-center">
+            Answers
+        </div>
+    </div>
+    {% for a in answers %}
+        <div class="row">
+            <a class="undecorated" href="{{ url_for('main.question', id=a.question_id) }}">
+            <div class="col-md-6 col-s-4">
+                <div class="inner question">
+                    <div class="question-short-title"><em>{{ a.question.title | capitalize}}</em></div>
+                    <div class="bottom-row">
+                        <div class="question-short-content">
+                        <span class="question-short-value">Currently at: {{ a.question.current_value }}</span>
+                        <span class="question-short-category">{{ a.question.category | capitalize }}</span>
+                        <span class="question-short-count">Answers: {{ a.question.answers.count() }}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </a>
+            <a href="{{ url_for('main.question',id=a.question_id, _anchor=a.id) }}">
+            <div class="col-md-6 col-s-4">
+                <div class="inner answer {% if a.accepted %}accepted{% endif %}">
+                    <div class="answer-content">{{ a.content }}</div>
+                    <div class="bottom-row">
+                    {% if a.accepted %}
+                        <div class="answer-accepted-btn">ACCEPTED</div>
+                    {% endif %}
+                    {% if (a.author == current_user or current_user.is_administrator()) and not a.question.solved %}
+                        <a href="{{ url_for('main.edit_answer',id=a.question_id, aid=a.id) }}"><button class="answer-edit">Edit Answer</button></a>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            </a>
+        </div>
+    {% endfor %}
+    {% endif %}
+
+{% endblock content %}

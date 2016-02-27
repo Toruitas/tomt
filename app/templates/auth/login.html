@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block title %}Login{% endblock %}
+
+
+
+{% block content %}
+<div class="col-md-4 col-sm-0"></div>
+<div class="col-md-4 col-sm-6">
+    <div class="solo-form">
+        <div class="page-header text-center">
+            <h1>Login</h1>
+        </div>
+
+        <div>
+            {{ wtf.quick_form(form) }}
+            <br>
+            <p>Forgot your password? <a href="{{ url_for('auth.password_reset_request') }}">Click here to reset it</a>.</p>
+            <p>New user? <a href="{{ url_for('auth.register') }}">Click here to register</a>.</p>
+        </div>
+    </div>
+</div>
+<div class="col-md-4 col-sm-0"></div>
+
+    <!-- if want to do custom form without relying on quick_form:
+    <input type="email"  required oninvalid="this.setCustomValidity('Put here custom message')"/> -->
+
+{% endblock %}
