@@ -78,3 +78,4 @@ info.txt
 data-dev.sqlite
 bower_components/
 migrations/
+Procfile
