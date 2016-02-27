@@ -253,7 +253,8 @@ def categories():
     """
     # app = current_app._get_current_object()
     categories = current_app.config['CATEGORIES']
-    return render_template('categories.html', categories=categories)
+    #return render_template('categories.html', categories=categories)
+    return redirect(url_for('main.questions'))
 
 
 @main.route('/categories/<category>/')
@@ -269,6 +270,8 @@ def category(category):
     q_ct = current_app.config['Q_PER_PAGE']
     if category == "top":
         matched = Question.query.filter_by(solved=False).order_by(Question.current_value.desc())#.limit(12).all()
+    elif category == "recent":
+        matched = Question.query.filter_by(solved=False).order_by(Question.date.desc())
     else:
         matched = Question.query.filter_by(solved=False,category=category).filter_by(solved=False)#.limit(12).all()
     if matched.count() > q_ct:
