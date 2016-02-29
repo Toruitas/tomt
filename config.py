@@ -37,19 +37,19 @@ class DevelopmentConfig(Config):
     DEBUG = True
     DEVELOPMENT = True
     USE_RELOADER = False
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URI') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DEV_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir, 'data-dev.sqlite')
     TIP_AUTO_APPROVE = True
 
 class TestingConfig(Config):
     TESTING = True
-    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URI') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('TEST_DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir,'data-test.sqlite')
     WTF_CSRF_ENABLED = False  # since extracting and parsing the CSRF token in tests is a bitch, easier to disable
 
 class ProductionConfig(Config):
     import psycopg2
-    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URI') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
         'sqlite:///' + os.path.join(basedir,'data.sqlite')
 
     @classmethod
