@@ -51,8 +51,8 @@ def create_app(config_name):
     from .payments import payments as payments_blueprint
     app.register_blueprint(payments_blueprint, url_prefix='/payments')
 
-    # if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
-    #     from flask.ext.sslify import SSLify
-    #     sslify = SSLify(app)
+    if not app.debug and not app.testing and not app.config['SSL_DISABLE']:
+        from flask.ext.sslify import SSLify
+        sslify = SSLify(app)
 
     return app

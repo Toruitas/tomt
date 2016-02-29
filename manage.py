@@ -28,6 +28,8 @@ def deploy():
     in this way makes it possible to run just this "deploy" command every time an installation or upgrade is done.
 
     heroku run python manage.py deploy
+
+    memi14ab@student.cbs.dk
     :return:
     """
     """Run deployment tasks."""
